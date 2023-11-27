@@ -11,7 +11,7 @@ typealias OnClickUpdate = (Duck) -> Unit
 typealias OnClickDelete = (Duck) -> Unit
 
 class DuckAdapter (
-    private val listBebek: List<Duck>,
+    private val listBebek: MutableList<Duck>,
     private val onClickUpdate: OnClickUpdate,
     private val onClickDelete: OnClickDelete
 ) : RecyclerView.Adapter<DuckAdapter.ItemDuckViewHolder>(){

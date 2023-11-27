@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
 import com.kinan.tugas_pertemuan_12.R
 import com.kinan.tugas_pertemuan_12.databinding.ActivityMainBinding
 import com.kinan.tugas_pertemuan_12.model.Bebek
@@ -46,9 +49,7 @@ class MainActivity : AppCompatActivity() {
         val EXTRA_DUCK = "img_duck"
         var data_duck = ""
 
-
     }
-
     fun shuffle(client : ApiService){
         val response : Call<Bebek> = client.getRandomDuck()
         response.enqueue(object : Callback<Bebek> {

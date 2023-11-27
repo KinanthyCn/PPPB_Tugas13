@@ -8,24 +8,20 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class ForthActivity : AppCompatActivity() {
-    private lateinit var mDuckDao: DuckTable
-    private lateinit var executorService: ExecutorService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val binding = ActivityForthBinding.inflate(layoutInflater)
-        executorService = Executors.newSingleThreadExecutor()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val db = DuckDatabase.getDatabase(this)
-        mDuckDao = db!!.duckTable()!!
         val imgUrl = intent.getStringExtra("IMAGE")
         Glide.with(this).load(imgUrl).into(binding.imageView)
 
         with(binding){
             btnSubmit.setOnClickListener{
-                update(
+                ThirdActivity.updateDuck(
                     Duck(
-                        id = intent.getIntExtra("ID", 0),
+                        id = intent.getStringExtra("ID").toString(),
                         title = title.text.toString(),
                         description = description.text.toString(),
                         message = Message.text.toString(),
@@ -37,10 +33,5 @@ class ForthActivity : AppCompatActivity() {
         }
     }
 
-    private fun update(duck: Duck) {
-        executorService.execute {
-            mDuckDao.update(duck)
-        }
-    }
 
 }
